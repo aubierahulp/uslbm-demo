@@ -10,6 +10,7 @@ import { appError } from '@/shared/domain/app-error';
 jest.mock('@/di', () => ({
   listRecords: jest.fn(),
   logout: jest.fn(),
+  checkForUpdate: async () => false,
   getBuildInfo: () => ({ appVersion: '1.0.0', runtimeVersion: 'rt', channel: 'preview', updateId: null }),
 }));
 jest.mock('expo-router', () => {

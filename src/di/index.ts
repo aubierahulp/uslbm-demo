@@ -22,6 +22,8 @@ import { makeGetRecord } from '@/features/records/domain/get-record';
 import { makeListRecords } from '@/features/records/domain/list-records';
 import { makeSaveRecord } from '@/features/records/domain/save-record';
 import { expoUpdateRepository } from '@/features/updates/data/expo-update-repository';
+import { makeApplyUpdate } from '@/features/updates/domain/apply-update';
+import { makeCheckForUpdate } from '@/features/updates/domain/check-for-update';
 import { makeGetBuildInfo } from '@/features/updates/domain/get-build-info';
 import { createSqlcipherVault } from '@/shared/data/sqlcipher-vault';
 
@@ -45,3 +47,5 @@ export const openDocument = makeOpenDocument(documents);
 export const runEncryptionBenchmark = makeRunEncryptionBenchmark(createQuickCryptoBenchmark(vault.getFileKey));
 
 export const getBuildInfo = makeGetBuildInfo(expoUpdateRepository);
+export const checkForUpdate = makeCheckForUpdate(expoUpdateRepository);
+export const applyUpdate = makeApplyUpdate(expoUpdateRepository);

@@ -10,4 +10,16 @@ export const expoUpdateRepository: UpdateRepository = {
     channel: Updates.channel,
     updateId: Updates.isEmbeddedLaunch ? null : Updates.updateId,
   }),
+  async check() {
+    // The update API rejects in development, where Metro serves the JS.
+    if (!Updates.isEnabled || __DEV__) return false;
+    const result = await Updates.checkForUpdateAsync();
+    // A rollback (`eas update:rollback` to the embedded build) reports isAvailable: false but still has to be applied.
+    return result.isAvailable || result.isRollBackToEmbedded;
+  },
+  async download() {
+    const result = await Updates.fetchUpdateAsync();
+    return result.isNew || result.isRollBackToEmbedded;
+  },
+  restart: () => Updates.reloadAsync(),
 };

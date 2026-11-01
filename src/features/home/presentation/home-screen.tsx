@@ -5,6 +5,7 @@ import { useAuthStore } from '@/features/auth/presentation/auth-store';
 import { RecordListItem } from '@/features/records/presentation/record-list-item';
 import { useRecords } from '@/features/records/presentation/use-records';
 import { BuildInfoCard } from '@/features/updates/presentation/build-info-card';
+import { UpdateBanner } from '@/features/updates/presentation/update-banner';
 import { Button } from '@/shared/presentation/components/button';
 import { ThemedText } from '@/shared/presentation/components/themed-text';
 import { ThemedView } from '@/shared/presentation/components/themed-view';
@@ -24,6 +25,7 @@ export function HomeScreen() {
         contentContainerStyle={styles.content}
         ListHeaderComponent={
           <View style={styles.section}>
+            <UpdateBanner />
             <ThemedText type="subtitle">Hi {user?.firstName}</ThemedText>
             <Button title="New record" onPress={() => router.push('/records/new')} />
             <Button title="Documents" variant="secondary" onPress={() => router.push('/documents')} />
