@@ -26,6 +26,7 @@ export function HomeScreen() {
           <View style={styles.section}>
             <ThemedText type="subtitle">Hi {user?.firstName}</ThemedText>
             <Button title="New record" onPress={() => router.push('/records/new')} />
+            <Button title="Documents" variant="secondary" onPress={() => router.push('/documents')} />
             {error && (
               <ThemedText themeColor="danger" accessibilityRole="alert">
                 {error}

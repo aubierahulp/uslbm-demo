@@ -54,13 +54,16 @@ describe('HomeScreen', () => {
     expect(await screen.findByRole('alert')).toHaveTextContent('Unlock the app to see your data.');
   });
 
-  it('opens the new record form and signs out', async () => {
+  it('opens the new record form and documents, and signs out', async () => {
     (listRecords as jest.Mock).mockResolvedValue([]);
     (logout as jest.Mock).mockResolvedValue(undefined);
     await render(<HomeScreen />);
 
     await fireEvent.press(screen.getByRole('button', { name: 'New record' }));
     expect(router.push).toHaveBeenCalledWith('/records/new');
+
+    await fireEvent.press(screen.getByRole('button', { name: 'Documents' }));
+    expect(router.push).toHaveBeenCalledWith('/documents');
 
     await fireEvent.press(screen.getByRole('button', { name: 'Sign out' }));
     expect(useAuthStore.getState().status).toBe('signed-out');

@@ -5,7 +5,9 @@ export type AppErrorCode =
   | 'unlock-cancelled'
   | 'biometrics-unavailable'
   | 'vault-locked'
-  | 'not-found';
+  | 'not-found'
+  | 'tampered'
+  | 'unsupported';
 
 /** Errors the domain knows about. `message` is safe to show to the user. */
 export type AppError = Error & { code: AppErrorCode };

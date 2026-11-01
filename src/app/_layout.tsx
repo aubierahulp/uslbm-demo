@@ -32,6 +32,7 @@ export default function RootLayout() {
           <Stack.Screen name="index" options={{ title: 'Field Vault' }} />
           <Stack.Screen name="records/new" options={{ title: 'New record' }} />
           <Stack.Screen name="records/[id]" options={{ title: 'Edit record' }} />
+          <Stack.Screen name="documents" options={{ title: 'Documents' }} />
         </Stack.Protected>
       </Stack>
     </ThemeProvider>

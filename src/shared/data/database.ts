@@ -12,6 +12,15 @@ const MIGRATIONS = [
     created_at INTEGER NOT NULL,
     updated_at INTEGER NOT NULL
   );`,
+  // The encrypted file lives at documents/vault/<id>.bin; its path is derived, because iOS moves the app container.
+  `CREATE TABLE documents (
+    id TEXT PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    mime_type TEXT NOT NULL,
+    size INTEGER NOT NULL,
+    sha256 TEXT NOT NULL,
+    created_at INTEGER NOT NULL
+  );`,
 ];
 
 /** Opens the SQLCipher database with a raw 256-bit hex key and brings the schema up to date. */

@@ -28,7 +28,8 @@ describe('openEncryptedDatabase', () => {
 
     expect(db.execAsync.mock.calls[0][0]).toBe(`PRAGMA key = "x'${KEY}'";`);
     expect(db.execAsync).toHaveBeenCalledWith(expect.stringContaining('CREATE TABLE records'));
-    expect(db.execAsync).toHaveBeenCalledWith('PRAGMA user_version = 1');
+    expect(db.execAsync).toHaveBeenCalledWith(expect.stringContaining('CREATE TABLE documents'));
+    expect(db.execAsync).toHaveBeenCalledWith('PRAGMA user_version = 2');
   });
 
   it('skips migrations that already ran', async () => {
@@ -37,7 +38,9 @@ describe('openEncryptedDatabase', () => {
 
     await openEncryptedDatabase(KEY);
 
-    expect(db.withTransactionAsync).not.toHaveBeenCalled();
+    expect(db.withTransactionAsync).toHaveBeenCalledTimes(1);
+    expect(db.execAsync).not.toHaveBeenCalledWith(expect.stringContaining('CREATE TABLE records'));
+    expect(db.execAsync).toHaveBeenCalledWith('PRAGMA user_version = 2');
   });
 
   it('refuses to continue without SQLCipher and closes the database', async () => {
